@@ -24,7 +24,7 @@ RUN sed -i -e 's@ .*.ubuntu.com@ http://mirrors.163.com@g' -e 's@ .*.debian.org@
     sed -i -e 's?^error_log =.*?error_log = /dev/stderr?g' /etc/php/$ver/fpm/php-fpm.conf ;\
     bash -c 'echo -e "expose_php=Off\n;upload_max_filesize=80M\npost_max_size=80M\ndate.timezone=Asia/Shanghai" > /etc/php/$ver/fpm/conf.d/99-php.ini' ;\
     sed -i -e 's/^listen =.*/listen = 0.0.0.0:9000/g' -e 's/www-data/nobody/g' /etc/php/$ver/fpm/pool.d/www.conf ;\
-    bash -c 'echo -e "#!/bin/bash\nexec /usr/sbin/php-fpm7.3 --nodaemonize --fpm-config /etc/php/$ver/fpm/php-fpm.conf" > /etc/service/php/run' ; \
+    bash -c 'echo -e "#!/bin/bash\nexec /usr/sbin/php-fpm$ver --nodaemonize --fpm-config /etc/php/$ver/fpm/php-fpm.conf" > /etc/service/php/run' ; \
     chmod 755 /etc/service/php/run
 
 EXPOSE 80/tcp 443/tcp 9000/tcp 7000/tcp
